@@ -13,6 +13,8 @@ Delegate when BOTH are true:
 - The work splits into 2+ tasks that can each be described in a brief, OR one task needs more than ~15 tool calls.
 - Each task can own its files without editing the same files as another task.
 
+Shared files that every task would touch (package exports, registries, routes, config) are not assigned to any worker. Opus edits them in the Integrate step.
+
 Otherwise do it inline. Each worker starts cold and rebuilds context, so delegating small work costs more than it saves.
 
 ## Workflow
@@ -31,7 +33,7 @@ OWNED FILES: <files this task may create or edit; everything else is read-only>
 STEPS: <numbered, concrete; name functions, commands, expected outputs>
 ACCEPTANCE: <commands to run and what passing looks like>
 OUT OF SCOPE: <adjacent things NOT to touch>
-REPORT: status (done/blocked), files changed, verification output (last lines only), open questions. Under 200 words.
+REPORT: status (done/blocked), files changed, verification output (last lines only), beyond the brief (anything done that the brief did not ask for, or "none"), open questions. Under 200 words.
 ```
 
 ## Common mistakes
